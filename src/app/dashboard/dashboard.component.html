@@ -1,0 +1,188 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <p class="card-category">Treinamentos realizados do mês</p>
+                        <h3 class="card-title">{{treinamentosDoMes.totalDeTreinamentosNoMesAtual}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Atualizado há 5 minutos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">trending_up</i>
+                        </div>
+                        <p class="card-category">Implantações do mês</p>
+                        <h3 class="card-title">{{implantacoesDoMes.quantidadeDeImplantacoesTotal}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Atualizado há 5 minutos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Cancelamentos do mês</p>
+                        <h3 class="card-title">{{implantacoesDoMes.qtdCancelado}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Atualizado há 5 minutos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">attach_money</i>
+                        </div>
+                        <p class="card-category">Comissão total deste mês</p>
+                        <h3 class="card-title">R$ {{implantacoesDoMes.valorParaReceberNoMes}},00</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Atualizado há 5 minutos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="ct-chart" id="envolucaoImplantacoes"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Evolução das Implantações</h4>
+                        <p class="card-category">
+                            <span class="text-success"><i class="fa fa-long-arrow-up"></i> </span>Evolução das implantações por mês dos ultimos anos</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-warning">
+                        <div class="ct-chart" id="implantacaoConversaoChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Implantações este mes</h4>
+                        <p class="card-category">Quantidade de implantações com ou sem conversão</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> Atualizado há 5 minutos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <div class="ct-chart" id="completedTasksChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Completed Tasks</h4>
+                        <p class="card-category">Last Campaign Performance</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Validações Pendentes</h4>
+                        <p class="card-category"> Segue abaixo as validações pendentes, aguardando agendamento para
+                            implantação. *Atualizado há 2 minutos</p>
+                    </div>
+                    <div class="card-body limitarTamanhoDaDiv">
+                        <div class="table-responsive limitarTamanhoDaTabela">
+                            <table class="table">
+                                <thead class="">
+                                    <th *ngFor="let c of colunasValidacoesPendentes" [style.text-align]="c.alinhamento">{{c.titulo}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of dadosPaginaValidacoesPendentes">
+                                        <td style="text-align:center">{{d.cliente.numeroDeSerie}}</td>
+                                        <td style="padding-left: 1%;">{{d.cliente.razaoSocial}}</td>
+                                        <td style="padding-left: 1%;">{{d.sistemaDeConversao}}</td>
+                                    </tr>
+                                    <tr *ngIf="dadosPaginaValidacoesPendentes.length==0">
+                                        <td [colSpan]="colunasValidacoesPendentes.length" class="mensagemTabelaSemRegistros">Sem
+                                            validações pendente</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Implantações Pendentes</h4>
+                        <p class="card-category"> Segue abaixo as implantações pendentes, aguardando para realizar processo. *Atualizado há 2 minutos</p>
+                    </div>
+                    <div class="card-body limitarTamanhoDaDiv">
+                        <div class="table-responsive limitarTamanhoDaTabela">
+                            <table class="table">
+                                <thead class="">
+                                    <th *ngFor="let c of colunasImplantacoesPendentes" [style.text-align]="c.alinhamento">{{c.titulo}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of dadosPaginaImplantacoesPendentes">
+                                        <td style="text-align:center">{{d.cliente.numeroDeSerie}}</td>
+                                        <td style="padding-left: 1%;">{{d.cliente.razaoSocial}}</td>
+                                        <td style="padding-left: 1%;">{{d.sistemaDeConversao}}</td>
+                                    </tr>
+                                    <tr *ngIf="dadosPaginaImplantacoesPendentes.length==0">
+                                        <td [colSpan]="colunasValidacoesPendentes.length" class="mensagemTabelaSemRegistros">Sem
+                                            implantações pendente</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button (click)="gerarGraficoDeConversaoDoMes()">clique</button>
+</div>

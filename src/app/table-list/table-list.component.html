@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Últimos treinamentos</h4>
+                        <p class="card-category"> Abaixo segue os últimos treinamentos realizados pelo setor de
+                            implantação. *Atualizado há 2 minutos</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="">
+                                    <th *ngFor="let c of colunas" [style.text-align]="c.alinhamento">{{c.titulo}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of dadosPagina">
+                                        <td style="text-align:center">{{d.id}}</td>
+                                        <td style="padding-left: 1%;">{{d.cliente.razaoSocial}}</td>
+                                        <td style="padding-left: 1%;">{{d.funcaoTreinada}}</td>
+                                        <td style="padding-left: 1%;">{{d.tecnicoResponsavel}}</td>
+                                        <td style="padding-left: 1%;">{{d.data}}</td>
+                                        <td style="text-align:center">{{d.horas}}</td>
+                                    </tr>
+                                    <tr *ngIf="dadosPagina.length==0">
+                                        <td [colSpan]="colunas.length" class="mensagemTabelaSemRegistros">Sem registros</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
