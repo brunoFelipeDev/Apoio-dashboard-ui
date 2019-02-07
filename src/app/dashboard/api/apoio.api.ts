@@ -32,4 +32,9 @@ export class ApoioApi {
         return this.http.get(this.uri + '/implantacao/pendente')
             .map(response => response.json());
     }
+
+    getImplantacoesPorMesDoAno(ano) {
+        return this.http.get(this.uri + '/implantacao/totalPorMesNoAno/' + ano)
+            .map(response => response.json());
+    }
 }

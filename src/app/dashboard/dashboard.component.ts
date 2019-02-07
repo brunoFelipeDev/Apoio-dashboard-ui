@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { ApoioService } from 'app/service/apoio.service';
+import { AppComponent } from 'app/app.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,45 +33,20 @@ export class DashboardComponent implements OnInit {
   optionImplantacaoDoMesChart;
   responsiveImplantacaoDoMesOptions;
 
-  constructor(private service: ApoioService) {
-    this.getImplantacoesDoMes();
-    this.getTreinamentosDoMes();
-    this.getValidacoesPendentes();
-    this.getImplantacoesPendentes();
+  constructor(private app: AppComponent) {
+    this.implantacoesDoMes = this.app.implantacoesDoMes;
+    this.dadosPaginaValidacoesPendentes = this.app.dadosPaginaValidacoesPendentes;
+    this.dadosPaginaImplantacoesPendentes = this.app.dadosPaginaImplantacoesPendentes;
+    this.treinamentosDoMes = this.app.treinamentosDoMes;
 
   }
-
-
-  //ngOnDestroy() {
-  //setInterval(function() { this.gerarGraficoDeConversaoDoMes() }, 1000);
-
-  //}
-
 
   ngOnInit() {
 
 
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
-    const dataDailySalesChart: any = {
-      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-      series: [
-        [0, 17, 7, 17, 23, 18, 30],
-      ]
-    };
 
-    const optionsDailySalesChart: any = {
-      lineSmooth: Chartist.Interpolation.cardinal({
-        tension: 0
-      }),
-      low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
-    }
-
-    var dailySalesChart = new Chartist.Line('#envolucaoImplantacoes', dataDailySalesChart, optionsDailySalesChart);
-
-    this.startAnimationForLineChart(dailySalesChart);
 
 
     /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
@@ -100,23 +76,23 @@ export class DashboardComponent implements OnInit {
     /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
     this.dataImplantacaoDoMesChart = {
-      labels: ['Com Conversão', 'Sem Conversão'],
+      labels: ['Sem Conversão', 'Com Conversão'],
       series: [
-        [0, 0]
+        [this.app.implantacoesDoMes.qtdSemConversao, this.app.implantacoesDoMes.qtdComConversao ]
       ]
 
     };
     this.optionImplantacaoDoMesChart = {
       axisX: {
-        showGrid: false,
+        showGrid: true,
         onlyInteger: true,
       },
       axisY: {
         scaleMinSpace: 200,
-        showGrid: false,
+        showGrid: true,
       },
       low: 0,
-      high: 40,
+      high: this.app.implantacoesDoMes.quantidadeDeImplantacoesTotal,
       stackBars: true,
       horizontalBars: true,
       chartPadding: { top: 0, right: 0, bottom: 0, left: 50 }
@@ -132,61 +108,10 @@ export class DashboardComponent implements OnInit {
       }]
     ];
 
-    //setInterval(function() { this.gerarGraficoDeConversaoDoMes() }, 1000);
-
-
     //start animation for the Emails Subscription Chart
     this.startAnimationForBarChart(new Chartist.Bar('#implantacaoConversaoChart', this.dataImplantacaoDoMesChart, this.optionImplantacaoDoMesChart, this.responsiveImplantacaoDoMesOptions));
 
   }
-
-  getImplantacoesDoMes() {
-    this.service.getImplantacoesDoMesAtual().subscribe(
-      (_implantacoes) => {
-        this.implantacoesDoMes = _implantacoes;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  getValidacoesPendentes() {
-    this.service.getValidacoesPendentes().subscribe(
-      (_validacoesPendentes) => {
-        this.dadosPaginaValidacoesPendentes = _validacoesPendentes;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  getImplantacoesPendentes() {
-    this.service.getImplantacoesPendentes().subscribe(
-      (_implantacoesPendentes) => {
-        this.dadosPaginaImplantacoesPendentes = _implantacoesPendentes;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  getTreinamentosDoMes() {
-    this.service.getTreinamentosDoMesAtual().subscribe(
-      (_treinamentos) => {
-        this.treinamentosDoMes = _treinamentos;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  gerarGraficoDeConversaoDoMes() {
-    this.dataImplantacaoDoMesChart = {
-      labels: ['Com Conversão', 'Sem Conversão'],
-      series: [
-        [5, 6]
-      ]
-    };
-    this.startAnimationForBarChart(new Chartist.Bar('#implantacaoConversaoChart', this.dataImplantacaoDoMesChart, this.optionImplantacaoDoMesChart, this.responsiveImplantacaoDoMesOptions));
-  }
-
-
 
   startAnimationForLineChart(chart) {
     let seq: any, delays: any, durations: any;

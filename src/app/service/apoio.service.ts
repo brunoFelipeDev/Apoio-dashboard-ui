@@ -25,4 +25,7 @@ export class ApoioService {
   getImplantacoesPendentes() {
     return this.apoioApi.getImplantacoesPendentes();
   }
+  getImplantacoesPorMesDoAno(ano) {
+    return this.apoioApi.getImplantacoesPorMesDoAno(ano);
+  }
 }
