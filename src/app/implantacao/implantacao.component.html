@@ -15,5 +15,68 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title ">Implantações do mês</h4>
+                        <p class="card-category"> Segue abaixo as implantações realizadas com sucesso. *Atualizado há 2
+                            minutos</p>
+                    </div>
+                    <div class="card-body limitarTamanhoDaDiv">
+                        <div class="table-responsive limitarTamanhoDaTabela">
+                            <table class="table">
+                                <thead class="">
+                                    <th *ngFor="let c of colunasImplantacoes" [style.text-align]="c.alinhamento">{{c.titulo}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of dadosPaginaImplantacoesComSucessoDoMes">
+                                        <td style="text-align:center">{{d.numeroDeSerie}}</td>
+                                        <td style="padding-left: 1%;">{{d.razaoSocial}}</td>
+                                        <td style="padding-left: 1%;">{{d.sistemaDeConversao}}</td>
+                                        <td style="padding-left: 1%;">{{d.dataImplantado}}</td>
+                                    </tr>
+                                    <tr *ngIf="dadosPaginaImplantacoesComSucessoDoMes.length==0">
+                                        <td [colSpan]="colunasImplantacoes.length" class="mensagemTabelaSemRegistros">Nenhuma
+                                            implantação finalizada por enquanto</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Implantações Canceladas</h4>
+                        <p class="card-category"> Segue abaixo as implantações canceladas do mês. *Atualizado há 2
+                            minutos</p>
+                    </div>
+                    <div class="card-body limitarTamanhoDaDiv">
+                        <div class="table-responsive limitarTamanhoDaTabela">
+                            <table class="table">
+                                <thead class="">
+                                    <th *ngFor="let c of colunasImplantacoes" [style.text-align]="c.alinhamento">{{c.titulo}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let d of dadosPaginaImplantacoesCanceladaDoMes">
+                                        <td style="text-align:center">{{d.numeroDeSerie}}</td>
+                                        <td style="padding-left: 1%;">{{d.razaoSocial}}</td>
+                                        <td style="padding-left: 1%;">{{d.sistemaDeConversao}}</td>
+                                        <td style="padding-left: 1%;">{{d.dataImplantado}}</td>
+                                    </tr>
+                                    <tr *ngIf="dadosPaginaImplantacoesCanceladaDoMes.length==0">
+                                        <td [colSpan]="colunasImplantacoes.length" class="mensagemTabelaSemRegistros">Sem
+                                            cancelamento este mês</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

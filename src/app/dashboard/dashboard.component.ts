@@ -44,11 +44,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
 
-    /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-
-
-
+    
     /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
     const dataCompletedTasksChart: any = {
