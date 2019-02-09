@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 export class ApoioApi {
 
     uri = 'http://localhost:8080';
+    //uri = 'http://172.16.0.45:8080';
 
     constructor(private http: Http) { }
 
